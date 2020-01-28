@@ -33,7 +33,7 @@ class ApplicationTests {
 	
 	@Test
 	public void listClient() {
-		client.get().uri("/api/ClientePersonal/dni/")
+		client.get().uri("http://localhost:8099/clientes/api/Clientes/")
 		.accept(MediaType.APPLICATION_JSON_UTF8)
 		.exchange()
 		.expectStatus().isOk()
@@ -51,8 +51,8 @@ class ApplicationTests {
 	
 	@Test
 	public void findByClient() {
-		Client cli = service.viewDniCliente("72739839").block();
-		client.get().uri("/api/ClientePersonal/{id}", Collections.singletonMap("id", cli.getId()))
+		Client cli = service.viewDniCliente("5e188e4db73e0f71630caacf").block();
+		client.get().uri("/api/Clientes/{id}", Collections.singletonMap("id", cli.getId()))
 		.accept(MediaType.APPLICATION_JSON_UTF8)
 		.exchange()
 		.expectStatus().isOk()

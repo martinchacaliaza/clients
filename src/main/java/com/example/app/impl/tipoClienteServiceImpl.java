@@ -36,4 +36,10 @@ public class tipoClienteServiceImpl implements TipoClienteService{
 	{
 	return tipoClienteDao.save(tipoCliente);
 	}
+	
+	@Override
+	public Mono<TypeClient> viewidTipoProducto(String idTipo) {
+		
+		return tipoClienteDao.viewidTipo(idTipo);
+	}
 }
