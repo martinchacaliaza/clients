@@ -57,7 +57,6 @@ public class ClienteControllers {
 	@ApiOperation(value = "LISTA CLIENTE POR DNI", notes = "")
 	@GetMapping("/dni/{dni}")
 	public Mono<ResponseEntity<Client>> viewId2(@PathVariable String dni) {
-
 		return clientService.viewDniCliente(dni)
 				.map(p -> ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON_UTF8).body(p))
 				.defaultIfEmpty(ResponseEntity.notFound().build());
@@ -76,16 +75,13 @@ public class ClienteControllers {
 	public Mono<Client> guardarCliente(@RequestBody Client cli) {
 		Mono<TypeClient> tipo = this.tipoClienteService.viewidTipoProducto(cli.getTipoCliente().getIdTipo());
 		return tipo.defaultIfEmpty(new TypeClient()).flatMap(c -> {
-			if (c.getIdTipo() == null) {
-				
+			if (c.getIdTipo() == null) {	
 				Mono.error(new InterruptedException("El tipo de cliente no existe"));	
-			
 				//cli.setDni("11");
 			}
 			return Mono.just(c);
 		}).flatMap(t -> {
 			cli.setTipoCliente(t);
-			
 			return clientService.saveClientePersonal(cli);
 		});
 	}
