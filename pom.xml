@@ -10,9 +10,9 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example.app</groupId>
-	<artifactId>microservicios.mongodb.banco.participantes</artifactId>
+	<artifactId>microservicios.mongodb.banco.clients</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>microservicios.mongodb.banco.participantes</name>
+	<name>microservicios.mongodb.banco.clients</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
