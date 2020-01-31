@@ -45,7 +45,6 @@ public class ClienteControllers {
 
 		);
 	}
-
 	@ApiOperation(value = "LISTA CLIENTE POR ID", notes = "")
 	@GetMapping("/{id}")
 	public Mono<ResponseEntity<Client>> viewId(@PathVariable String id) {
