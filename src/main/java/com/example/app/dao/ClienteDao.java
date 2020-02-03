@@ -10,9 +10,6 @@ import reactor.core.publisher.Mono;
 
 public interface ClienteDao extends ReactiveMongoRepository<Client, String> {
 
-	
-	@Query("{ 'dni' : ?0}")
-	Mono<Client> viewDniCliente(String dni);
-	
+	Mono<Client> findByDni(String dni);
 	
 }

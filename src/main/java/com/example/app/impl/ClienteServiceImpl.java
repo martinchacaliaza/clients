@@ -32,7 +32,7 @@ public class ClienteServiceImpl implements ClienteService {
 	@Override
 	public Mono<Client> viewDniCliente(String dni)
 	{
-	return clienteDao.viewDniCliente(dni);
+	return clienteDao.findByDni(dni);
 	
 	}
 	
