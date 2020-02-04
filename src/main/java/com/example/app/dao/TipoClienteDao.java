@@ -10,6 +10,6 @@ import reactor.core.publisher.Mono;
 
 public interface TipoClienteDao extends ReactiveMongoRepository<TypeClient, String> {
 
-	@Query("{ 'idTipo' : ?0}")
-	Mono<TypeClient> viewidTipo(String id);
+	
+	Mono<TypeClient> findByIdTipo(String id);
 }

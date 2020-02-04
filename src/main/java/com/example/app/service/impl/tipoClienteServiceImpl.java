@@ -1,4 +1,4 @@
-package com.example.app.impl;
+package com.example.app.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,10 +36,10 @@ public class tipoClienteServiceImpl implements TipoClienteService{
 	{
 	return tipoClienteDao.save(tipoCliente);
 	}
-	
 	@Override
-	public Mono<TypeClient> viewidTipoProducto(String idTipo) {
-		
-		return tipoClienteDao.viewidTipo(idTipo);
+	public Mono<TypeClient> findByIdTipo(String idTipo) {
+		return tipoClienteDao.findByIdTipo(idTipo);
 	}
+	
+
 }

@@ -9,5 +9,5 @@ public interface TipoClienteService {
 	Flux<TypeClient> findAllTipoCliente();
 	Mono<TypeClient> findByIdTipoCliente(String id);
 	Mono<TypeClient> saveTipoCliente(TypeClient tipoCliente);
-	Mono<TypeClient> viewidTipoProducto(String idTipo);
+	Mono<TypeClient> findByIdTipo(String idTipo);
 }

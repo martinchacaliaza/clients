@@ -14,13 +14,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import com.example.app.exception.RequestException;
 import com.example.app.models.Bank;
 import com.example.app.models.Client;
 
 import com.example.app.models.TypeClient;
 import com.example.app.service.ClienteService;
 import com.example.app.service.TipoClienteService;
-import com.sistema.app.exception.RequestException;
 
 import io.swagger.annotations.ApiOperation;
 import reactor.core.publisher.Flux;
@@ -72,11 +72,14 @@ public class ClienteControllers {
 	@ApiOperation(value = "GUARDA CLIENTE VALIDANDO SI EL [TIPO CLIENTE] EXISTE", notes = "")
 	@PostMapping
 	public Mono<Client> guardarCliente(@RequestBody Client cli) {
-		Mono<TypeClient> tipo = this.tipoClienteService.viewidTipoProducto(cli.getTipoCliente().getIdTipo());
+		
+		
+		Mono<TypeClient> tipo = this.tipoClienteService.findByIdTipo(cli.getTipoCliente().getIdTipo());
 		return tipo.defaultIfEmpty(new TypeClient()).flatMap(c -> {
 			if (c.getIdTipo() == null) {	
-				Mono.error(new InterruptedException("El tipo de cliente no existe"));	
-				//cli.setDni("11");
+			
+				return Mono.error(new InterruptedException("El tipo de cliente no existe"));	
+				
 			}
 			return Mono.just(c);
 		}).flatMap(t -> {
