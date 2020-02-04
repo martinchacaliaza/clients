@@ -1,4 +1,4 @@
-package com.example.app.models;
+package com.example.app.dto;
 
 
 import javax.validation.constraints.NotEmpty;
@@ -11,7 +11,7 @@ import lombok.Setter;
 @Getter
 @Setter
 
-public class Bank {
+public class dtoBank {
 	
 	private String id;
 	private String codigo_banco;

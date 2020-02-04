@@ -3,9 +3,8 @@ package com.example.app.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
-import com.example.app.dao.TipoClienteDao;
 import com.example.app.models.TypeClient;
+import com.example.app.repository.TipoClienteDao;
 import com.example.app.service.TipoClienteService;
 
 import reactor.core.publisher.Flux;

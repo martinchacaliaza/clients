@@ -1,4 +1,4 @@
-package com.example.app.models;
+package com.example.app.dto;
 
 import javax.validation.constraints.NotEmpty;
 
@@ -10,7 +10,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class TypeCurrentAccount {
+public class dtoTypeCurrentAccount {
 	@NotEmpty
 	private String idTipo;
 	@NotEmpty

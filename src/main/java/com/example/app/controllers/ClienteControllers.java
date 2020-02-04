@@ -15,9 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import com.example.app.exception.RequestException;
-import com.example.app.models.Bank;
+import com.example.app.dto.dtoBank;
 import com.example.app.models.Client;
-
 import com.example.app.models.TypeClient;
 import com.example.app.service.ClienteService;
 import com.example.app.service.TipoClienteService;
@@ -41,7 +40,7 @@ public class ClienteControllers {
 	@GetMapping
 	public Mono<ResponseEntity<Flux<Client>>> findAll() {
 		return Mono.just(ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON_UTF8)
-				.body(clientService.findAllClientePersonal())
+				.body(clientService.findAllCliente())
 
 		);
 	}
@@ -66,26 +65,15 @@ public class ClienteControllers {
 	@PutMapping
 	public Mono<Client> updateClientePersonal(@RequestBody Client cliente) {
 		System.out.println(cliente.toString());
-		return clientService.saveClientePersonal(cliente);
+		return clientService.saveCliente(cliente);
 	}
 
 	@ApiOperation(value = "GUARDA CLIENTE VALIDANDO SI EL [TIPO CLIENTE] EXISTE", notes = "")
 	@PostMapping
 	public Mono<Client> guardarCliente(@RequestBody Client cli) {
 		
-		
-		Mono<TypeClient> tipo = this.tipoClienteService.findByIdTipo(cli.getTipoCliente().getIdTipo());
-		return tipo.defaultIfEmpty(new TypeClient()).flatMap(c -> {
-			if (c.getIdTipo() == null) {	
-			
-				return Mono.error(new InterruptedException("El tipo de cliente no existe"));	
-				
-			}
-			return Mono.just(c);
-		}).flatMap(t -> {
-			cli.setTipoCliente(t);
-			return clientService.saveClientePersonal(cli);
-		});
+		return clientService.saveCliente(cli);
+
 	}
 
 	@ApiOperation(value = "ELIMINA CLIENTE POR ID", notes = "")

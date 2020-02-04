@@ -1,4 +1,4 @@
-package com.example.app.models;
+package com.example.app.dto;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
@@ -16,12 +16,12 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class CurrentAccount {
+public class dtoCurrentAccount {
 	
 	private String id;
 	private String dni;
 	private String numero_cuenta;
-	private TypeCurrentAccount tipoProducto;
+	private dtoTypeCurrentAccount tipoProducto;
 	private String fecha_afiliacion;
 	private String fecha_caducidad;
 	private double saldo;

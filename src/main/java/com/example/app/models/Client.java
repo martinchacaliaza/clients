@@ -4,6 +4,8 @@ package com.example.app.models;
 import javax.validation.constraints.NotEmpty;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -33,6 +35,7 @@ public class Client {
 	@NotEmpty
 	private TypeClient tipoCliente;
 	@NotEmpty
+	//@Field(name="codigobancario")
 	private String codigo_bancario;
 	
 }
