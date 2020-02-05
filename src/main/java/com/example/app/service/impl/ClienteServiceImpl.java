@@ -3,8 +3,6 @@ package com.example.app.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.web.reactive.function.client.WebClient;
-
 import com.example.app.exception.RequestException;
 import com.example.app.models.Client;
 import com.example.app.models.TypeClient;
@@ -65,11 +63,11 @@ public class ClienteServiceImpl implements ClienteService {
 		}).flatMap(t -> {
 			cli.setTipoCliente(t);
 	
-			Mono<Long> cl = clienteDao.findByDniAndCodigobancario(cli.getDni(), cli.getCodigo_bancario()).count();
+			Mono<Long> cl = clienteDao.findByDniAndCodigoBancario(cli.getDni(), cli.getCodigoBancario()).count();
 			return cl.flatMap(a -> {
 				if (a>0) {
 				
-					throw new RequestException("Cliente ya existe para esta entidad bancaria)");
+					throw new RequestException("Cliente ya existe para esta entidad bancaria");
 					
 				}else {
 					return clienteDao.save(cli);

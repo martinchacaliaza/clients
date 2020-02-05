@@ -1,8 +1,6 @@
 package com.example.app.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,7 +31,6 @@ public class TipoClienteControllers {
 		return Mono.just(
 				ResponseEntity
 				.ok()
-				.contentType(MediaType.APPLICATION_JSON_UTF8)
 				.body(tipoClienteService.findAllTipoCliente())
 				);
 	}
@@ -43,7 +40,6 @@ public class TipoClienteControllers {
 	@GetMapping("/{id}")
 	public Mono<ResponseEntity<TypeClient>> viewId(@PathVariable String id){
 		return tipoClienteService.findByIdTipoCliente(id).map(p-> ResponseEntity.ok()
-				.contentType(MediaType.APPLICATION_JSON_UTF8)
 				.body(p))
 				.defaultIfEmpty(ResponseEntity.notFound().build());	
 	}

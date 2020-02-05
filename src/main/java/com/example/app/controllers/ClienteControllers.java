@@ -12,14 +12,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.reactive.function.client.WebClient;
-
-import com.example.app.exception.RequestException;
-import com.example.app.dto.dtoBank;
 import com.example.app.models.Client;
-import com.example.app.models.TypeClient;
 import com.example.app.service.ClienteService;
-import com.example.app.service.TipoClienteService;
 
 import io.swagger.annotations.ApiOperation;
 import reactor.core.publisher.Flux;
@@ -32,14 +26,13 @@ public class ClienteControllers {
 	@Autowired
 	private ClienteService clientService;
 
-	@Autowired
-	private TipoClienteService tipoClienteService;
 
 
 	@ApiOperation(value = "LISTA TODOS LOS CLIENTES", notes = "")
 	@GetMapping
 	public Mono<ResponseEntity<Flux<Client>>> findAll() {
-		return Mono.just(ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON_UTF8)
+		return Mono.just(ResponseEntity.ok()
+				.contentType(MediaType.APPLICATION_JSON)
 				.body(clientService.findAllCliente())
 
 		);
@@ -48,7 +41,9 @@ public class ClienteControllers {
 	@GetMapping("/{id}")
 	public Mono<ResponseEntity<Client>> viewId(@PathVariable String id) {
 		return clientService.findByIdClientePersonal(id)
-				.map(p -> ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON_UTF8).body(p))
+				.map(p -> ResponseEntity.ok()
+				.contentType(MediaType.APPLICATION_JSON)
+				.body(p))
 				.defaultIfEmpty(ResponseEntity.notFound().build());
 	}
 
@@ -56,7 +51,7 @@ public class ClienteControllers {
 	@GetMapping("/dni/{dni}")
 	public Mono<ResponseEntity<Client>> viewId2(@PathVariable String dni) {
 		return clientService.viewDniCliente(dni)
-				.map(p -> ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON_UTF8).body(p))
+				.map(p -> ResponseEntity.ok().body(p))
 				.defaultIfEmpty(ResponseEntity.notFound().build());
 
 	}

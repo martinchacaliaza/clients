@@ -38,10 +38,10 @@ class ApplicationTests {
 	@Test
 	public void listClient() {
 		client.get().uri("/api/Clientes/")
-		.accept(MediaType.APPLICATION_JSON_UTF8)
 		.exchange()
 		.expectStatus().isOk()
-		.expectHeader().contentType(MediaType.APPLICATION_JSON_UTF8)
+		.expectHeader()
+		.contentType(MediaType.APPLICATION_JSON)
 		.expectBodyList(Client.class).consumeWith(response -> {
 			List<Client> cli = response.getResponseBody();
 			
@@ -57,10 +57,9 @@ class ApplicationTests {
 	public void findByIdClient() {
 		Client cli = service.findByIdClientePersonal("5e333cfcc3dbd20f24b094f8").block();
 		client.get().uri("/api/Clientes/{id}", Collections.singletonMap("id", cli.getId()))
-		.accept(MediaType.APPLICATION_JSON_UTF8)
 		.exchange()
 		.expectStatus().isOk()
-		.expectHeader().contentType(MediaType.APPLICATION_JSON_UTF8);
+		.expectHeader();
 	}
 	
 	@Test
@@ -79,7 +78,7 @@ class ApplicationTests {
 		type.setDescripcion("Personal");
 		
 		bank.setTipoCliente(type);
-		bank.setCodigo_bancario("123");
+		bank.setCodigoBancario("123");
 		
 		client.post()
 		.uri("api/Clientes")
@@ -100,13 +99,13 @@ class ApplicationTests {
 			Assertions.assertThat(b.getCorreo()).isNotEmpty().isEqualTo("privera@hialpesa.com");
 			Assertions.assertThat(b.getTipoCliente().getIdTipo()).isNotEmpty().isEqualTo("1");
 			Assertions.assertThat(b.getTipoCliente().getDescripcion()).isNotEmpty().isEqualTo("Personal");
-			Assertions.assertThat(b.getCodigo_bancario()).isNotEmpty().isEqualTo("123");
+			Assertions.assertThat(b.getCodigoBancario()).isNotEmpty().isEqualTo("123");
 		});
 	}
 	
 	@Test
 	void updateClient() {
-		Client clients = service.viewDniCliente("9898989894").block();
+		Client clients = service.viewDniCliente("989898989").block();
 		clients.setDni("9898989897");
 		clients.setNombres("Pablo Alfonso");
 
@@ -127,7 +126,7 @@ class ApplicationTests {
 
 	@Test
 	void deleteClient() {
-		Client cli= service.viewDniCliente("989898989").block();	
+		Client cli= service.viewDniCliente("9898989897").block();	
 		client.delete()
 		.uri("api/Clientes" + "/{id}", Collections.singletonMap("id", cli.getId()))
 		.exchange()
